@@ -1,0 +1,19 @@
+--CALL usp_GetOrnList('1')
+
+DROP Procedure IF exists usp_GetOrnList;
+
+DELIMITER //
+CREATE PROCEDURE usp_GetOrnList
+(IN LngTyp VARCHAR(01))
+
+BEGIN
+  SELECT
+    a.ORNCD,
+	a.ORNSEQ,
+  	b.ORNLANG,
+	b.ORNNAM,
+	b.ORNSPEC,
+	b.ORNIMG
+  FROM ORNMAS a LEFT JOIN ORNLANG b ON a.ORNCD = b.ORNCD WHERE ORNLANG = LngTyp ORDER BY ORNSEQ;
+END //
+DELIMITER ;
